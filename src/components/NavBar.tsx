@@ -1,7 +1,11 @@
-import React from "react";
-import { Menu } from "heroicons-react";
+import React, { useState } from "react";
+import { Menu, X } from "heroicons-react";
 
 function Navbar() {
+	const [nav, setNav] = useState(false);
+
+	const handleClick = () => setNav(!nav);
+
 	return (
 		<div className="w-screen h-[80px] z-10 bg-zinc-100 fixed drop-shadow-lg">
 			<div className="px-2 flex justify-between items-center w-full h-full">
@@ -23,12 +27,12 @@ function Navbar() {
 					<button className="px-8 py-3">Sign up</button>
 				</div>
 
-				<div className="md:hidden">
-					<Menu className="w-5" />
+				<div className="md:hidden" onClick={handleClick}>
+					{!nav ? <Menu className="w-5" /> : <X className="w-5" />}
 				</div>
 			</div>
 
-			<ul className="absolute bg-zinc-200 w-full px-8">
+			<ul className={!nav ? "hidden" : "absolute bg-zinc-200 w-full px-8"}>
 				<li className="border-b-2 border-zinc-300 w-full">Home</li>
 				<li className="border-b-2 border-zinc-300 w-full">About</li>
 				<li className="border-b-2 border-zinc-300 w-full">Support</li>
